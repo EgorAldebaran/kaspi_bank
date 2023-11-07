@@ -31,7 +31,7 @@ class UnitTest extends KernelTestCase
         $this->doctrine = static::$kernel->getContainer()->get('doctrine')->getManager();
     }
     
-    public function createProduct()
+    public function testcreateProduct()
     {
         var_dump ('---avada kedavra---');
 
@@ -77,7 +77,7 @@ class UnitTest extends KernelTestCase
         $this->doctrine->flush();
     }
 
-    public function createDepartment()
+    public function testCreateDepartment()
     {
         var_dump ('---createor---');
         $operations = new Department;
@@ -100,7 +100,7 @@ class UnitTest extends KernelTestCase
         $this->doctrine->flush();
     }
 
-    public function createBranch()
+    public function testCreateBranch()
     {
         $branch0 = new Branch;
         $branch1 = new Branch;
@@ -140,7 +140,7 @@ class UnitTest extends KernelTestCase
         $this->doctrine->flush();
     }
 
-    public function createCustomer()
+    public function testCreateCustomer()
     {
         $c0 = new Customer;
         $c1 = new Customer;
@@ -194,7 +194,7 @@ class UnitTest extends KernelTestCase
         $this->doctrine->flush();
     }
 
-    public function createIndividual()
+    public function testCreateIndividual()
     {
         $c0 = $this->doctrine->getRepository(Customer::class)->findOneBy(['fed_id' => '222-22-2222']);
         $c1 = $this->doctrine->getRepository(Customer::class)->findOneBy(['fed_id' => '333-33-3333']);
@@ -237,7 +237,7 @@ class UnitTest extends KernelTestCase
         $this->doctrine->flush();
     }
 
-    public function createEmployee()
+    public function testCreateEmployee()
     {
         $e0 = new Employee;
         $e1 = new Employee;
