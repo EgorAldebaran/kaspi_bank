@@ -19,7 +19,7 @@ class Product
     public const AUT = 6;
     public const BUS = 7;
     public const SBL = 8;
-        
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

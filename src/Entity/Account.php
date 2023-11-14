@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: AccountRepository::class)]
 class Account
 {
+    public const STATUS_ACTIVE = 'ACTIVE';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

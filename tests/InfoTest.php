@@ -6,8 +6,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Contract\HttpClient\HttpClientInterface;
-use App\Entity\Unit;
-use App\Entity\UnitFood;
+use App\Entity\Employee;
+use App\Entity\Department;
+use App\Entity\Account;
 
 class InfoTest extends KernelTestCase
 {
@@ -50,7 +51,7 @@ class InfoTest extends KernelTestCase
         var_dump ('---done---');
     }
 
-    public function xtestAvadaKedavra()
+    public function ytestAvadaKedavra()
     {
         $name = 'Jacke';
         
@@ -89,7 +90,7 @@ class InfoTest extends KernelTestCase
         var_dump ($need);
     }
 
-    public function testAvadaKedavra()
+    public function xtestAvadaKedavra()
     {
         $unitRepo = $this->doctrine->getRepository(Unit::class);
         $unitName = 'Megan';
@@ -114,4 +115,36 @@ class InfoTest extends KernelTestCase
         }
         
     }
+
+    public function ytestInfo()
+    {
+        $spell = $this->doctrine->createQueryBuilder();
+        $spell
+            ->select('e.id as LOOK', 'e.id * 1000', 'UPPER(e.fname)')
+            ->from(Employee::class, 'e');
+        $craft = $spell->getQuery()->getResult();
+        var_dump ($craft);
+
+    }
+
+    public function testInfo()
+    {
+        /// найти все продавцов - по сути юзеров у которых есть аккаунты
+
+        /// все аккаунты
+        $spell = $this->doctrine->createQueryBuilder();
+        $spell
+            ->select('a')
+            ->from(Account::class, 'a');
+        $craft = $spell->getQuery()->getResult();
+
+        /// по приколу все города юзеров
+        $cities = [];
+        foreach ($craft as $witchcraft) {
+            $cities[] = $witchcraft->getCustomer()->getCity();
+        }
+
+        var_dump($cities);
+    }
+    
 }

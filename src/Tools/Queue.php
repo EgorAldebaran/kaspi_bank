@@ -7,10 +7,11 @@ class Queue
     /**
     * @var system body
     */
-    protected $system_body;
+    protected $system_body = [];
 
-    public function __construct($sys)  {
-        $this->system_body = $sys;
+    public function __construct($src)
+    {
+        $this->system_body = $src; 
     }
 
     public function getSystem(): ?array
@@ -26,7 +27,7 @@ class Queue
     public function isEmpty()
     {
         if ($this->system_body == NULL) {
-            throw new \Exception('body cannot be empty');
+            throw new \Exception('body is empty');
         }
 
         return;

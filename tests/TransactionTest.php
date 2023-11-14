@@ -10,6 +10,8 @@ use App\Entity\Transaction;
 use App\Entity\Employee;
 use App\Entity\Branch;
 use App\Entity\Account;
+use App\Entity\Product;
+use App\Entity\ProductType;
 use Carbon\Carbon;
 
 class TransactionTest extends KernelTestCase
@@ -48,5 +50,44 @@ class TransactionTest extends KernelTestCase
         $this->doctrine->persist($t);
         $this->doctrine->flush($t);
         
+    }
+
+    public function yyytestAvadaKedavra()
+    {
+        /// найди айди сотрудников открывших счета
+        $qm = $this->doctrine->createQueryBuilder();
+        $qm
+            ->select('a')
+            ->from(Account::class, 'a')
+            ->where(
+                $qm->expr()->eq('a.status', ':status')
+            )
+            ->setParameter('status', Account::STATUS_ACTIVE);
+
+        $accounts = $qm->getQuery()->getResult();
+        $employeesIds = [];
+
+        foreach ($accounts as $account) {
+            $employeesIds[] = $account->getEmployee()->getId();
+        }
+
+        var_dump ($employeesIds);
+    }
+
+    public function testLookingAvada()
+    {
+        /// найти все счета(продукты) являющимися лицевыми счетами Customer Accounts
+        $qm = $this->doctrine->createQueryBuilder();
+        $qm
+            ->select('p')
+            ->from(Product::class, 'p')
+            ->innerJoin(ProductType::class, 'pt', 'WITH', 'p.product_type=pt.id')
+            ->where(
+                $qm->expr()->eq('pt.id', ':product_type')
+            )
+            ->setParameter('product_type', ProductType::ACCOUNT);
+            
+        $product_account = $qm->getQuery()->getResult()[0]->getName();
+        var_dump ($product_account);
     }
 }
