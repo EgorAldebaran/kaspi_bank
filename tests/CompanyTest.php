@@ -128,4 +128,9 @@ class CompanyTest extends KernelTestCase
 
         return $res ?: NULL;
     }
+
+    ///one
+    ///two
+    /// three
+    /// result
 }
