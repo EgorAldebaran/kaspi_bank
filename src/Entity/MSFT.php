@@ -9,6 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: MSFT::class)]
 class MSFT
 {
+    public const TYPE_CHANGE_LEVEL = 1;
+    public const TYPE_CHANGE_TREND = 2;
+    public const TYPE_CHANGE_GREAT_TREND = 3;
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -34,6 +38,15 @@ class MSFT
 
     #[ORM\Column]
     private ?float $adjusted = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $typeChange = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $sma_200 = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $sma_50 = null;
 
     public function getId(): ?int
     {
@@ -120,6 +133,42 @@ class MSFT
     public function setAdjusted(float $adjusted): static
     {
         $this->adjusted = $adjusted;
+
+        return $this;
+    }
+
+    public function getTypeChange(): ?int
+    {
+        return $this->typeChange;
+    }
+
+    public function setTypeChange(?int $typeChange): static
+    {
+        $this->typeChange = $typeChange;
+
+        return $this;
+    }
+
+    public function getSma200(): ?float
+    {
+        return $this->sma_200;
+    }
+
+    public function setSma200(?float $sma_200): static
+    {
+        $this->sma_200 = $sma_200;
+
+        return $this;
+    }
+
+    public function getSma50(): ?float
+    {
+        return $this->sma_50;
+    }
+
+    public function setSma50(?float $sma_50): static
+    {
+        $this->sma_50 = $sma_50;
 
         return $this;
     }
