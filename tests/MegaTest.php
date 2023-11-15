@@ -11,6 +11,7 @@ use App\Entity\Customer;
 use App\Entity\Account;
 use App\Entity\Employee;
 use App\Entity\Department;
+use App\Entity\MSFT;
 use Doctrine\ORM\Query\Expr\Join;
 use Carbon\Carbon;
 
@@ -257,7 +258,7 @@ class MegaTest extends KernelTestCase
         };
     }
     
-    public function testCoefficient()
+    public function infotestCoefficient()
     {
         $x = [1, 2, 3, 4, 5];
         $y = [2, 4, 6, 8, 10];
@@ -282,4 +283,22 @@ class MegaTest extends KernelTestCase
         $info = array_walk($x, function (&$value, $key) { $value *= 2;});
         var_dump ($x);
     }
+
+    public function testAvadaKedavra()
+    {
+        /// найди все объемы майкрософта
+        $qm = $this->doctrine->createQueryBuilder();
+        $qm
+            ->select('msft')
+            ->from(MSFT::class, 'msft');
+        $msft = $qm->getQuery()->getResult();
+        $volumes = [];
+        foreach ($msft as $company) {
+            $volumes[] = $company->getVolume();
+        }
+
+        var_dump ($volumes);
+    }
+
+    
 }

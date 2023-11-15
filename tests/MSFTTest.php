@@ -189,6 +189,6 @@ class MSFTTest extends KernelTestCase
                 ->setParameter('lprice', $lprice);
             $set_mark = $mark->getQuery()->getResult();
         }
-
+        
     }
 }
