@@ -1,14 +1,16 @@
 <?php  
 
 namespace App\Tests;
-use Doctrine\ORM\EntityManagerInterface;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Contract\HttpClient\HttpClientInterface;
 use App\Entity\MSFT;
 use App\Entity\Note;
 use App\Service\Notes;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 
 class CompanyTest extends KernelTestCase
 {
@@ -29,7 +31,7 @@ class CompanyTest extends KernelTestCase
         $this->note = static::$kernel->getContainer()->get(Notes::class)->getInstance();
     }
 
-    public function testAvadaKedavra()
+    public function zjltestAvadaKedavra()
     {
         /// достать запись касаемую майкрософт
         $qm = $this->doctrine->createQueryBuilder();
@@ -129,8 +131,77 @@ class CompanyTest extends KernelTestCase
         return $res ?: NULL;
     }
 
-    ///one
-    ///two
-    /// three
-    /// result
+    public function llitestAvadaKedavra()
+    {
+        var_dump ('---msft between five month---');
+        /// вообще найди цены компании месяц назад
+        $qm = $this->doctrine->createQueryBuilder();
+        $time = Carbon::create(2022, 1, 1);
+        //var_dump ($time);
+
+        $look = CarbonImmutable::now();
+        var_dump ($look);
+    }
+
+    public function ljptestAvadaKedavra()
+    {
+        //// найти все цены, которые выше средней цены и оставить только их
+        $qm = $this->doctrine->createQueryBuilder();
+        $qm
+            ->select('msft')
+            ->from(MSFT::class, 'msft');
+        $msft = $qm->getQuery()->getResult();
+        $price_close = [];
+        foreach ($msft as $company) {
+            $price_close[] = $company->getClosePrice();
+        }
+
+        $bprice = $this->bubble_sort($price_close);
+
+        $average = array_sum($bprice) / count($bprice) - 1;
+
+        $max_price = max($bprice); 
+
+        $only_high_price = [];
+        $only_high_price = array_filter($bprice, function ($element) use ($average) {
+            return $element > $average;
+        });
+
+        var_dump (count($only_high_price));
+    }
+
+    public function bubble_sort($sys): ?array
+    {
+        for ($i = 0; $i < count($sys); $i++) {
+            for ($l = 0; $l < count($sys) - 1; $l++) {
+                if ($sys[$l] > $sys[$l+1]) {
+                    $temp = $sys[$l+1];
+                    $sys[$l+1] = $sys[$l];
+                    $sys[$l] = $temp;
+                }
+            }
+        }
+        return $sys ?: null;
+    }
+
+    public function testAvadaKedavra()
+    {
+        $look = 10000;
+        $info = 1000;
+
+        $result = $look <=> $info;
+        var_dump ($result);
+
+        $system = [
+            'jacke' => 'diamonds',
+            'queen' => 'hearts',
+            'jacke' => 'black and whorsees',
+            'king' => 'diamonds',
+            'jacke' => 'something else from jacke...',
+            'dolly' => 'spades'
+        ];
+
+        $only_jacke = [];
+
+    }
 }
