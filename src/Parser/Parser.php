@@ -7,15 +7,15 @@ use App\Proxy\UserAgentList;
 
 class Parser
 {
-    public $url;
-    public $use_proxy;
-    public $timeout;
-    public $returnHtml;
-    public $returnJson;
-    public $returnCode;
-    public $returnErrors;
-    public $returnParseTime;
-    public $isSuccess;
+    private $url;
+    private $use_proxy;
+    private $timeout;
+    private $returnHtml;
+    private $returnJson;
+    private $returnCode;
+    private $returnErrors;
+    private $returnParseTime;
+    private $isSuccess;
 
     public $proxy;
     public $userAgent;
@@ -74,5 +74,10 @@ class Parser
     {
         $this->userAgent = UserAgentList::getUserAgent();
         return $this->userAgent['string'] ?: NULL;
+    }
+
+    public function getJson()
+    {
+        return $this->returnJson;
     }
 }

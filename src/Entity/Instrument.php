@@ -15,7 +15,7 @@ class Instrument
     private ?int $id = null;
 
     #[ORM\Column(length: 10)]
-    private ?string $symbol;
+    private ?string $symbol = null;
 
     #[ORM\Column(length: 255)]
     private ?string $AssetType;
@@ -23,8 +23,8 @@ class Instrument
     #[ORM\Column(length: 255)]
     private ?string $Name;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Description;
+    #[ORM\Column(type: "text")]
+    private $Description;
 
     #[ORM\Column]
     private ?int $CIK;
@@ -50,20 +50,17 @@ class Instrument
     #[ORM\Column(length: 255)]
     private ?string $FiscalYearEnd;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $LatestQuarter;
+    #[ORM\Column(length: 255)]
+    private string $LatestQuarter;
 
-    #[ORM\Column]
+    #[ORM\Column(type: "bigint")]
     private ?int $MarketCapitalization;
 
-    #[ORM\Column]
+    #[ORM\Column(type: "bigint")]
     private ?int $EBITDA;
 
     #[ORM\Column]
     private ?float $PERatio;
-
-    #[ORM\Column]
-    private ?float $PEGRatio;
 
     #[ORM\Column]
     private ?float $BookValue;
@@ -92,10 +89,10 @@ class Instrument
     #[ORM\Column]
     private ?float $ReturnOnEquityTTM;
 
-    #[ORM\Column]
+    #[ORM\Column(type: "bigint")]
     private ?int $RevenueTTM;
 
-    #[ORM\Column]
+    #[ORM\Column(type: "bigint")]
     private ?int $GrossProfitTTM;
 
     #[ORM\Column]
@@ -130,18 +127,6 @@ class Instrument
 
     #[ORM\Column]
     private ?float $Beta;
-
-    #[ORM\Column]
-    private ?float $W52WeekHigh;
-
-    #[ORM\Column]
-    private ?float $W52WeekLow;
-
-    #[ORM\Column]
-    private ?float $M50DayMovingAverage;
-
-    #[ORM\Column]
-    private ?float $M200DayMovingAverage;
 
     #[ORM\Column]
     private ?float $SharesOutstanding;
@@ -306,7 +291,7 @@ class Instrument
         return $this->LatestQuarter;
     }
 
-    public function setLatestQuarter(\DateTimeInterface $LatestQuarter): self
+    public function setLatestQuarter(string $LatestQuarter): self
     {
         $this->LatestQuarter = $LatestQuarter;
 
@@ -345,18 +330,6 @@ class Instrument
     public function setPERatio(float $PERatio): self
     {
         $this->PERatio = $PERatio;
-
-        return $this;
-    }
-
-    public function getPEGRatio(): ?float
-    {
-        return $this->PEGRatio;
-    }
-
-    public function setPEGRatio(float $PEGRatio): self
-    {
-        $this->PEGRatio = $PEGRatio;
 
         return $this;
     }
@@ -625,54 +598,6 @@ class Instrument
         return $this;
     }
 
-    public function getW52WeekHigh(): ?float
-    {
-        return $this->W52WeekHigh;
-    }
-
-    public function setW52WeekHigh(float $W52WeekHigh): self
-    {
-        $this->W52WeekHigh = $W52WeekHigh;
-
-        return $this;
-    }
-
-    public function getW52WeekLow(): ?float
-    {
-        return $this->W52WeekLow;
-    }
-
-    public function setW52WeekLow(float $W52WeekLow): self
-    {
-        $this->W52WeekLow = $W52WeekLow;
-
-        return $this;
-    }
-
-    public function getM50DayMovingAverage(): ?float
-    {
-        return $this->M50DayMovingAverage;
-    }
-
-    public function setM50DayMovingAverage(float $M50DayMovingAverage): self
-    {
-        $this->M50DayMovingAverage = $M50DayMovingAverage;
-
-        return $this;
-    }
-
-    public function getM200DayMovingAverage(): ?float
-    {
-        return $this->M200DayMovingAverage;
-    }
-
-    public function setM200DayMovingAverage(float $M200DayMovingAverage): self
-    {
-        $this->M200DayMovingAverage = $M200DayMovingAverage;
-
-        return $this;
-    }
-
     public function getSharesOutstanding(): ?int
     {
         return $this->SharesOutstanding;
@@ -690,7 +615,7 @@ class Instrument
         return $this->DividendDate;
     }
 
-    public function setDividendDate(\DateTimeInterface $DividendDate): self
+    public function setDividendDate($DividendDate): self
     {
         $this->DividendDate = $DividendDate;
 
@@ -702,7 +627,7 @@ class Instrument
         return $this->ExDividendDate;
     }
 
-    public function setExDividendDate(\DateTimeInterface $ExDividendDate): self
+    public function setExDividendDate($ExDividendDate): self
     {
         $this->ExDividendDate = $ExDividendDate;
 
