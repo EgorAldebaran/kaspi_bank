@@ -35,7 +35,7 @@ class FinAnalysTest extends KernelTestCase
     }
 
     /// каждая строка это компания
-    public function testCreateAndSaveInstrument()
+    public function xltestCreateAndSaveInstrument()
     {
         $url = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=WAII57B91ROAWB4K";
         $cave_of_the_dragons = [

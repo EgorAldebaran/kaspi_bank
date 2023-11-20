@@ -4,11 +4,11 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Entity\MSFT;
+use App\Entity\T;
 
 class AppFixtures extends Fixture
 {
-    public const FILE = 'public/MSFT.csv';
+    public const FILE = 'public/T.csv';
     
     public function load(ObjectManager $manager): void
     {
@@ -16,7 +16,7 @@ class AppFixtures extends Fixture
         fgetcsv($handle);
 
         while (($data = fgetcsv($handle)) !== false) {
-            $orcl = new MSFT;
+            $orcl = new T;
             $orcl->setDate(new \DateTime($data[0]));
             $orcl->setOpenPrice($data[1]);
             $orcl->setHighPrice($data[2]);
