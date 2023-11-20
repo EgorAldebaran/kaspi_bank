@@ -149,6 +149,15 @@ class MSFTTest extends KernelTestCase
         return $sys ?: NULL;
     }
 
+    public function dydtestCreateTitle()
+    {
+        /// задача дать Инструменту символ в каждую колонку
+        $msft = new MSFT;
+        $instrument_title = implode(array_slice(explode('\\', get_class($msft)), 2));
+        
+        var_dump ($instrument_title);
+    }
+
     public function createLevel()
     {
         /// задача собрать всех у кого сегодняшняя цена на один доллар меньше чем вчерашняя - изменение один доллар и более

@@ -6,7 +6,7 @@ use App\Repository\MSFTRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: MSFT::class)]
+#[ORM\Entity(repositoryClass: MSFTRepository::class)]
 class MSFT
 {
     public const TYPE_CHANGE_LEVEL = 1;

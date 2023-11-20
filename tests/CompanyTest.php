@@ -184,7 +184,7 @@ class CompanyTest extends KernelTestCase
         return $sys ?: null;
     }
 
-    public function testAvadaKedavra()
+    public function xltestAvadaKedavra()
     {
         $look = 10000;
         $info = 1000;
@@ -203,5 +203,33 @@ class CompanyTest extends KernelTestCase
 
         $only_jacke = [];
 
+    }
+
+    public function testAvadaKedavra()
+    {
+        var_dump ('---kadavr---');
+        $qm = $this->doctrine->createQueryBuilder();
+        $qm
+            ->select('msft')
+            ->from(MSFT::class, 'msft');
+
+        $msft = $qm->getQuery()->getResult();
+        $price = [];
+
+        foreach ($msft as $company) {
+            $price[] = $company->getClosePrice();
+        }
+
+        $max = max($price);
+        var_dump ($max);
+        $min = min($price); var_dump ($min);
+
+        $time = [];
+        foreach ($msft as $company) {
+            $time[] = $company->getDate();
+        }
+
+        $first = $time[0];
+        var_dump ($first);
     }
 }
