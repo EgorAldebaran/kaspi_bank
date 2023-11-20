@@ -35,7 +35,7 @@ class FinAnalysTest extends KernelTestCase
     }
 
     /// каждая строка это компания
-    public function xxxtestCreateAndSaveInstrument()
+    public function testCreateAndSaveInstrument()
     {
         $url = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=WAII57B91ROAWB4K";
         $cave_of_the_dragons = [
@@ -71,7 +71,7 @@ class FinAnalysTest extends KernelTestCase
             $system_company[$i]->setLatestQuarter($fundamental_dragon[$i]->getJson()->LatestQuarter);
             $system_company[$i]->setMarketCapitalization($fundamental_dragon[$i]->getJson()->MarketCapitalization);
             $system_company[$i]->setEBITDA($fundamental_dragon[$i]->getJson()->EBITDA);
-            $system_company[$i]->setPERatio($fundamental_dragon[$i]->getJson()->PERatio);
+            $system_company[$i]->setPERatio((float)$fundamental_dragon[$i]->getJson()->PERatio);
             $system_company[$i]->setBookValue($fundamental_dragon[$i]->getJson()->BookValue);
             $system_company[$i]->setDividendPerShare($fundamental_dragon[$i]->getJson()->DividendPerShare);
             $system_company[$i]->setDividendYield($fundamental_dragon[$i]->getJson()->DividendYield);
@@ -80,34 +80,31 @@ class FinAnalysTest extends KernelTestCase
             $system_company[$i]->setProfitMargin($fundamental_dragon[$i]->getJson()->ProfitMargin);
             $system_company[$i]->setOperatingMarginTTM($fundamental_dragon[$i]->getJson()->OperatingMarginTTM);
             $system_company[$i]->setReturnOnAssetsTTM($fundamental_dragon[$i]->getJson()->ReturnOnAssetsTTM);
+            $system_company[$i]->setReturnOnEquityTTM($fundamental_dragon[$i]->getJson()->ReturnOnEquityTTM);
             $system_company[$i]->setRevenueTTM($fundamental_dragon[$i]->getJson()->RevenueTTM);
             $system_company[$i]->setGrossProfitTTM($fundamental_dragon[$i]->getJson()->GrossProfitTTM);
             $system_company[$i]->setDilutedEPSTTM($fundamental_dragon[$i]->getJson()->DilutedEPSTTM);
             $system_company[$i]->setQuarterlyEarningsGrowthYOY($fundamental_dragon[$i]->getJson()->QuarterlyEarningsGrowthYOY);
             $system_company[$i]->setQuarterlyRevenueGrowthYOY($fundamental_dragon[$i]->getJson()->QuarterlyRevenueGrowthYOY);
             $system_company[$i]->setAnalystTargetPrice($fundamental_dragon[$i]->getJson()->AnalystTargetPrice);
-            $system_company[$i]->setTrailingPE($fundamental_dragon[$i]->getJson()->TrailingPE);
+            $system_company[$i]->setTrailingPE((float)$fundamental_dragon[$i]->getJson()->TrailingPE);
             $system_company[$i]->setForwardPE($fundamental_dragon[$i]->getJson()->ForwardPE);
             $system_company[$i]->setPriceToSalesRatioTTM($fundamental_dragon[$i]->getJson()->PriceToSalesRatioTTM);
             $system_company[$i]->setPriceToBookRatio($fundamental_dragon[$i]->getJson()->PriceToBookRatio);
             $system_company[$i]->setEVToRevenue($fundamental_dragon[$i]->getJson()->EVToRevenue);
             $system_company[$i]->setEVToEBITDA($fundamental_dragon[$i]->getJson()->EVToEBITDA);
             $system_company[$i]->setBeta($fundamental_dragon[$i]->getJson()->Beta);
-            ///$system_company[$i]->setW52WeekHigh($fundamental_dragon[$i]->getJson()->52WeekHigh);
-            ///$system_company[$i]->setW52WeekLow($fundamental_dragon[$i]->getJson()->52WeekLow);
-            ///$system_company[$i]->setM50MDayMovingAverage($fundamental_dragon[$i]->getJson()->50DayMovingAverage);
-            ///$system_company[$i]->setM200DayMovingAverage($fundamental_dragon[$i]->getJson()->200DayMovingAverage);
             $system_company[$i]->setSharesOutstanding($fundamental_dragon[$i]->getJson()->SharesOutstanding);
-            $system_company[$i]->setDividendDate($fundamental_dragon[$i]->getJson()->DividendDate);
-            $system_company[$i]->setExDividendDate($fundamental_dragon[$i]->getJson()->ExDividendDate);
-
+            $system_company[$i]->setDividendDate((float)$fundamental_dragon[$i]->getJson()->DividendDate);
+            $system_company[$i]->setExDividendDate((float)$fundamental_dragon[$i]->getJson()->ExDividendDate);
+            
             $this->doctrine->persist($system_company[$i]);
         }
 
         $this->doctrine->flush();
     }
 
-    public function testOneCompany()
+    public function ydydtestOneCompany()
     {
         var_dump ('---one company---');
         $url = "https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=WAII57B91ROAWB4K";
